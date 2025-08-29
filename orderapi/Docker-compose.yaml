@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  orderapi:
+    build:
+      context: .
+    image: orderapi
+    container_name: orderapi
+    networks:
+      - demo
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    container_name: postgres
+    networks:
+      - demo
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app123
+      POSTGRES_DB: usersdb
+    ports:
+      - "5432:5432"
+  
+  adminer:
+    image: adminer
+    container_name: adminer
+    networks:
+      - demo
+    ports:
+      - "8088:8080"
+    depends_on:
+      - db
+
+networks:
+  demo:
+    driver: bridge

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata: 
+  name: pong
+spec:
+
+# kubectl apply create-namespace.yaml

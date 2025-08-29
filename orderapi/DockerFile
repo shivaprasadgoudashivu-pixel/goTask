@@ -1,0 +1,13 @@
+FROM golang AS builder
+
+WORKDIR /orderapi
+COPY . .
+
+RUN go build -ldflags="-s -w" -o orderapi .
+
+FROM alpine:latest
+WORKDIR /orderapi
+COPY --from=builder /orderapi/orderapi .
+EXPOSE 8080
+
+ENTRYPOINT [ "./orderapi" ]

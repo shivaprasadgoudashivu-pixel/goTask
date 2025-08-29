@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "pong-pod"
+  namespace: pong
+  labels:
+    app: "pong"
+spec:
+  containers:
+  - name: pong-container
+    image: docker.io/shivaprasadgoudam/ping:v1
+    resources:
+      limits:
+        cpu: 200m
+        memory: 500Mi
+      requests:
+        cpu: 100m
+        memory: 200Mi
+    ports:
+    - containerPort:  80
+      name:  http
